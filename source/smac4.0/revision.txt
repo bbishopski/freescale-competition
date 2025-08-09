@@ -1,0 +1,96 @@
+Revision History for SMAC
+
+version 2_2
+-Reg 0x04: The default front end gain adjustment was switched from 0x78 to 0x8D.
+-Reg 0x08: High side injection of the 1st LO is selected which should be matched to the Phase invert bit.
+-Reg 0x38: Correlator Threshold increased to 0x8 to help with false detections.
+-Renamed HCS08GB60_hw_config.h to mcu_hw_init.h
+-Renamed HCS08GB60_hw_config.c to mcu_hw_init.c
+-Added TX PA_adjust register to MC13192_regs.h
+-Added MLME_MC13192_PA_output_adjust
+-PLME_MC13192_FE_gain_adjust fixed error that wrote to wrong register
+-PLME_set_MC13192_tmr_prescale fixed error that wrote to wrong register
+-drv_read_rx_ram: Initialized status to 0.
+-drv_read_rx_ram: Fixed rx_length to be 16 bits.
+-PHY:	Fixed error with disable_MC13192_interrupts; Should be disable_MC13192_interrupts();
+-PHY: Fixed error with restore_MC13192_interrupts; Should be restore_MC13192_interrupts();
+-ARD pins definition in MC13192_hw_config.h now defines a real reset that will allow common HW between 802.15.4/ZigBee and SMAC.
+-init_gpio() changed to set Reset pin data (RESET = NO) DDIR (output) and Pullup enable (ON)
+-Added to startup routine to allow the MCU to reset MC13192 and wait for IRQ.
+-Disabled C1420: Result of function call ignored
+-Disabled C1801: Implicit parameter definition
+-Disabled C2705: Possible loss of data
+-vectortable.c: Changed while(1) to for(;;) since warning is not created.
+-Phy pd_data_indication: If the rcv is on and a pd_data_request is sent by the app pd_data_request returns RX_ON for status.
+-Renamed the target libs to be different for GB60 EVB and ARD.  As it was confusing the linker and assuming it was up to date.
+-changed status variable to be consistent in the mac to int from __uint8__
+-MLME_energy_detect return type should be __uint8__
+-MLME_link_quality return type should be __uint8__
+-changed TIMESTAMP_HI_MASK from 0xFF to 0x00FF since it is a 16 bit value.
+
+-Need to add serial debugger Target (Not complete)
+
+
+version 2_1
+- Changed simple_phy.c/pd_data_indication to pass up the timeout indication. This functionality
+	was dropped in version 2_0.
+
+version 2_0
+- 16MHz required due to LO1 precharge timing requirements
+- System Interrupts are now enabled within the MC13192 interrupt service routine.
+- Added LO1_precharge and LO1_charge_off functions to drivers.c
+- Implemented precharge/charge off in drivers.c interrupt handler (4 places)
+- Implemented precharge/charge off in simple_phy.c PLME_set_trx_state_request
+- Implemented precharge/charge off in simple_phy.c PLME_energy_detect
+- Set register 0x33 in MC13192_hw_config.c to enable precharge/charge off
+- Above required for MC13192 V2.0 only.
+- Fixed PLME_hibernate_request and PLME_wake_request. Previously, went into DOZE.
+- Error in driver.c. ATTN always went to reset handler.
+- Implemented MLME_MC13192_reset_indication via drivers.c and MC13192_hw_config.c
+- Initialized and set rtx_mode in HCS08GB60_hw_config.c and MC13192_hw_config.c
+- Added register 7 write for every read spi (MC13192 reset indication issue)
+- Added MLME_link_quality
+- Added MLME_MC13192_soft_reset
+- Added MLME_MC13192_xtal_adjust
+- Added MLME_set_MC13192_tmr_prescale
+- Added MLME_doze_request
+
+
+version 1_0_1
+- Added MLME_energy_detect
+- Added PLME_energy_detect
+- Added CCA interrupt to the driver.c interrupt service routine
+- Added prototypes to the respective header files
+- Added a soft MC13192 reset to the HCS08GB60_hw_config.c mcu_init function.
+- Added the LO unlock interrupt mask in the interrupt service routine.
+
+version 1_0_0
+- Initial Release
+- re-enabled interrupts in the phy pd_data_indication
+- Fixed Comments
+ 
+version 0_0_6
+- Added Paul Sofianos lighting application
+- Separated the SMAC from the app by creating two projects.
+- Query seems to be working now.
+- updated filenames to reflect better naming.
+- Eliminated extra project_data files.
+- Eliminated TARGET group and files per Paul's input
+- Added a TARGET compiler variable to select between AXM-0308C and ARD, located in pub_def.h
+- Moved the mcu_external_clock to the app.
+- Moved the set_clock_out function to the app.
+
+version 0_0_3
+- Altered MAC not to expect strings but rx_packet_t and tx_packet_t
+- updated for MC13192 v2.0
+- Added m68evb08gb60.c to target group
+- Moved m68evb08gb60.h to target group
+- removed the SPI polarity inverts from rx_ram and read_spi_1 for MC13192 v2.0
+- Fixed the error in mask for the RTX_enable with timeout. 
+
+version 0_0_2
+
+Error: TX always transmitted the same data.
+Fix: in Proprietary_mac.c replaced a strcat with strcpy.
+failure desc: Strcat added the new data instead of overwriting the old data with the new.
+Editor: Larry Roshak (FLR005)
