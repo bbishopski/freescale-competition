@@ -1,7 +1,7 @@
 # freescale-competition
 Prize winning project for Freescale international competition
 
-See project-description.pdf for more details.
+See [Project Description](./project-description.pdf) for more details.
 
 The Magic Wah is a wireless expression pedal for musical instruments.  The system is based on the popular wah-wah pedal that has been around since the early 1960’s.  It produces a distinctive tone that many musicians rely use to add expression to their playing.   The traditional wah pedal requires that the musician manually step on the wah pedal to make the “wah” sound.  The wireless wah pedal frees the musician from the need to stand directly at the pedal and offers many other advantages over the traditional wah pedal.
 
