@@ -1,6 +1,8 @@
 # freescale-competition
 Prize winning project for Freescale international competition
 
+See project-description.pdf for more details.
+
 The Magic Wah is a wireless expression pedal for musical instruments.  The system is based on the popular wah-wah pedal that has been around since the early 1960’s.  It produces a distinctive tone that many musicians rely use to add expression to their playing.   The traditional wah pedal requires that the musician manually step on the wah pedal to make the “wah” sound.  The wireless wah pedal frees the musician from the need to stand directly at the pedal and offers many other advantages over the traditional wah pedal.
 
 Traditional wah pedals are simple analog circuits.  The wah effect is accomplished by sweeping the frequencies of a bandpass filter as the user steps on the pedal.  The act of stepping on the pedal turns a potentiometer that changes the bandpass filter frequencies making the “wah” sound.  The Magic Wah uses the same type of analog circuitry to achieve the “wah” sound, but rather than step on a pedal to control the sound, a sensor, worn on the foot, controls the “wah” effect.  The analog potentiometer is replaced with a digital potentiometer that is adjusted by a microcontroller.
@@ -11,4 +13,12 @@ The Magic Wah was developed using a pair of Freescale 13192 SARD (sensor applica
 
 The MMA6261 and MMA1260D accelerometers are used to measure overall movement, detect specific gestures, and to measure tilt.  The system is turned off and on by simple foot gestures.  To turn the wah pedal on, the user simply plants their heel down with toe pointing up.  To turn off, the foot is moved to the side laterally.  When no movement is detected for an extended period of time, the software will transition into a low power mode to extend battery life.
  
+
+<img width="662" height="497" alt="image" src="https://github.com/user-attachments/assets/3afc99c5-eee4-4ae7-a751-4c8205c7d130" />
+
+<img width="604" height="474" alt="image" src="https://github.com/user-attachments/assets/c00efe55-46a1-40e9-973d-399df6843954" />
+
+<img width="663" height="415" alt="image" src="https://github.com/user-attachments/assets/7c1e5dff-1c7f-4709-8ade-631e1f743e35" />
+
+
 
